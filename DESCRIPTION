@@ -1,0 +1,11 @@
+Package: latentMAR
+Title: Package accompanying LMAR outcome paper
+Version: 0.0.0.9000
+Authors@R: 
+    person("Trang", "Nguyen", , "trang.nguyen@jhu.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-1653-5491"))
+Description: This package provides code and output for the paper "Identification of complier and noncomplier average causal effects in the presence of latent missing-at-random (LMAR) outcomes: a unifying view and choices of assumptions".
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
