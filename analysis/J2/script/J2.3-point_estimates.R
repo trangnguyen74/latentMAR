@@ -188,5 +188,5 @@ effect.estimates <- mget(c("eff.ER.nSNR",
 names(effect.estimates) <- substr(names(effect.estimates), 5, nchar(names(effect.estimates)))
 
 saveRDS(effect.estimates,
-        file = here::here("analysis", "outputs", "J2", "point_estimates.rds"))
+        file = here::here("analysis", "J2", "outputs", "point_estimates.rds"))
 

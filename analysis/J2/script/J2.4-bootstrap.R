@@ -65,4 +65,4 @@ colnames(effects) <- c("cace", "cace_2.5%", "cace_97.5%",
 
 
 saveRDS(effects,
-        file = here::here("analysis", "outputs", "J2", "point_and_ci.rds"))
+        file = here::here("analysis", "J2", "outputs", "point_and_ci.rds"))

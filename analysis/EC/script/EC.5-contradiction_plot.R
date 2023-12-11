@@ -28,6 +28,32 @@ varpi.1n <- predict(r1n.mod, newdata = dat, type = "response")
 lambda.0 <- predict(r0.mod,  newdata = dat, type = "response")
 
 
+r1c.gbm = ps(as.formula(R.form), data = dat1[dat1$type==1,],
+             n.trees           = 5000,
+             interaction.depth = 1,
+             shrinkage         = 0.01,
+             stop.method       = "ks.max",
+             n.minobsinnode    = 10,
+             n.keep            = 1,
+             n.grid            = 25,
+             ks.exact          = NULL,
+             verbose           = FALSE,
+             keep.data         = TRUE)
+r1n.gbm = ps(as.formula(R.form), data = dat1[dat1$type==0,],
+             n.trees           = 20000,
+             interaction.depth = 1,
+             shrinkage         = 0.01,
+             stop.method       = c("es.mean", "ks.max"),
+             n.minobsinnode    = 10,
+             n.keep            = 1,
+             n.grid            = 25,
+             ks.exact          = NULL,
+             verbose           = FALSE)
+
+varpi.1c.gbm <- predict(r1c.gbm$gbm.obj, newdata = dat, type = "response")
+varpi.1n.gbm <- predict(r1n.gbm$gbm.obj, newdata = dat, type = "response")
+
+
 contradiction_plot(miss.assumption = "rER",
                    pi.1 = pi.c,
                    varpi.10 = varpi.1n,
@@ -41,3 +67,18 @@ contradiction_plot(miss.assumption = "SCR",
                    lambda.0 = lambda.0,
                    bin.width = .05,
                    x.step = .2)
+
+
+ggplot(data = data.frame(probs = varpi.1n,
+                         wts = 1-pi.c),
+       aes(x = probs, weight = wts)) +
+    geom_histogram(breaks = seq(0,1,.05))
+
+ggplot(data = data.frame(probs = varpi.1c,
+                         wts = pi.c),
+       aes(x = probs, weight = wts)) +
+    geom_histogram(breaks = seq(0,1,.05))
+
+ggplot(data = data.frame(probs = lambda.0),
+       aes(x = probs)) +
+    geom_histogram(breaks = seq(0,1,.05))

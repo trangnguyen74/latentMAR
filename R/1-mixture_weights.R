@@ -115,9 +115,6 @@ contradiction_plot <- function(miss.assumption, pi.1, varpi.11, varpi.10, lambda
     break.points <- seq(floor(min(probs)/bin.width)*bin.width,
                         ceiling(max(probs)/bin.width)*bin.width,
                         bin.width)
-    # x.ticks <- seq(ceiling(min(probs)/.1)*.1,
-    #                floor(max(probs)/.1)*.1,
-    #                .1)
 
     if (all(in.range=="in")) {
         p <- p + ggplot2::geom_histogram(breaks = break.points, fill = "black")
@@ -129,14 +126,13 @@ contradiction_plot <- function(miss.assumption, pi.1, varpi.11, varpi.10, lambda
         p <- p +
             ggplot2::geom_histogram(breaks = break.points,
                                     mapping = ggplot2::aes(fill = in.range)) +
-            scale_fill_manual(values = c("black", "red"), guide = "none")
+            ggplot2::scale_fill_manual(values = c("black", "red"), guide = "none")
     }
 
     p <- p +
-        # scale_x_continuous(breaks = x.ticks) +
-        labs(x = "response probability",
-             y = "bin mass") +
-        theme_bw()
+        ggplot2::labs(x = "response probability",
+                      y = "bin mass") +
+        ggplot2::theme_bw()
 
 
 
@@ -151,14 +147,14 @@ contradiction_plot <- function(miss.assumption, pi.1, varpi.11, varpi.10, lambda
         } else                   { mass.line <- paste(mass.line, signif(left.mass, 3), "on the left;", signif(right.mass, 3), "on the right")
         }
 
-        p <- p + labs(subtitle = mass.line)
+        p <- p + ggplot2::labs(subtitle = mass.line)
     }
 
     if (!missing(x.step)) {
         x.ticks <- seq(floor(min(probs)/x.step)*x.step,
                        ceiling(max(probs)/x.step)*x.step,
                        x.step)
-        p <- p + scale_x_continuous(breaks = x.ticks)
+        p <- p + ggplot2::scale_x_continuous(breaks = x.ticks)
     }
 
     p

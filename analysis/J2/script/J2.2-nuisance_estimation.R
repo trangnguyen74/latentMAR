@@ -40,4 +40,4 @@ saveRDS(list(pi.1 = pi.c,
              mu.11 = mu.1c,
              mu.10 = mu.1n,
              kappa.0R = kappa.0R),
-        file = here::here("analysis", "outputs", "J2", "nuisance.rds"))
+        file = here::here("analysis", "J2", "outputs", "nuisance.rds"))

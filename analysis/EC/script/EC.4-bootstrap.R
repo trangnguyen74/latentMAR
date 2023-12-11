@@ -60,3 +60,18 @@ colnames(effects) <- c("cace", "cace_2.5%", "cace_97.5%",
 
 saveRDS(effects,
         file = here::here("analysis", "EC", "outputs", "point_and_ci.rds"))
+
+
+###
+## stratum prevalence estimation
+
+boot.pi.1 <- sapply(1:boot.num, function(z) {
+
+    nuis <- ec_nuisance_estimation(cbind(dat, wt = boot.wt[z,]))
+
+    mean(nuis$pi.1)
+})
+
+pi.1 <- c(mean(nuis$pi.1),
+          quantile(boot.pi.1, probs = c(.025, .975)))
+names(pi.1) <- c("pi.1", "pi.1_2.5%", "pi.1_97.5%")
