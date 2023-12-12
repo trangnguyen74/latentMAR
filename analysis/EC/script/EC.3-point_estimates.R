@@ -5,15 +5,15 @@ y.bounds <- c(1,6)
 
 # mixture weights under different specific missingness assumptions
 
-mix.wts.rER <- mixture_weights(miss.assumption = "rER",
-                               pi.1 = nuis$pi.1,
-                               varpi.10 = nuis$varpi.10,
-                               lambda.0 = nuis$lambda.0)
+mix.wts.nSNR <- mixture_weights(miss.assumption = "nSNR",
+                                pi.1 = nuis$pi.1,
+                                varpi.10 = nuis$varpi.10,
+                                lambda.0 = nuis$lambda.0)
 
-mix.wts.SCR <- mixture_weights(miss.assumption = "SCR",
-                               pi.1 = nuis$pi.1,
-                               varpi.11 = nuis$varpi.11,
-                               lambda.0 = nuis$lambda.0)
+mix.wts.nSCR <- mixture_weights(miss.assumption = "nSCR",
+                                pi.1 = nuis$pi.1,
+                                varpi.11 = nuis$varpi.11,
+                                lambda.0 = nuis$lambda.0)
 
 mix.wts.rPI <- mixture_weights(miss.assumption = "rPI",
                                pi.1 = nuis$pi.1)
@@ -28,15 +28,15 @@ mix.wts.rPO <- mixture_weights(miss.assumption = "rPO",
 # mu.10(X) and mu.11(X) under different principal identification assumptions
 # combined with different specific missingness assumptions
 
-mus.0c.ER.rER <- mus_under_control(principal.assumption = "ER",
-                                   mix.wts = mix.wts.rER,
-                                   mu.10 = nuis$mu.10,
-                                   kappa.0R = nuis$kappa.0R)
+mus.0c.ER.nSNR <- mus_under_control(principal.assumption = "ER",
+                                    mix.wts = mix.wts.nSNR,
+                                    mu.10 = nuis$mu.10,
+                                    kappa.0R = nuis$kappa.0R)
 
-mus.0c.ER.SCR <- mus_under_control(principal.assumption = "ER",
-                                   mix.wts = mix.wts.SCR,
-                                   mu.10 = nuis$mu.10,
-                                   kappa.0R = nuis$kappa.0R)
+mus.0c.ER.nSCR <- mus_under_control(principal.assumption = "ER",
+                                    mix.wts = mix.wts.nSCR,
+                                    mu.10 = nuis$mu.10,
+                                    kappa.0R = nuis$kappa.0R)
 
 mus.0c.ER.rPI <- mus_under_control(principal.assumption = "ER",
                                    mix.wts = mix.wts.rPI,
@@ -51,29 +51,29 @@ mus.0c.ER.rPO <- mus_under_control(principal.assumption = "ER",
 mus.0c.PI <- mus_under_control(principal.assumption = "PI",
                                kappa.0R = nuis$kappa.0R)
 
-mus.0c.PIsensSMDe.lo.rER <- mus_under_control(principal.assumption = "PIsens-SMDe",
-                                              mix.wts = mix.wts.rER,
-                                              kappa.0R = nuis$kappa.0R,
-                                              varsigma.0R = nuis$varsigma.0R,
-                                              eta = -.5)
+mus.0c.PIsensSMDe.lo.nSNR <- mus_under_control(principal.assumption = "PIsens-SMDe",
+                                               mix.wts = mix.wts.nSNR,
+                                               kappa.0R = nuis$kappa.0R,
+                                               varsigma.0R = nuis$varsigma.0R,
+                                               eta = -.5)
 
-mus.0c.PIsensSMDe.hi.rER <- mus_under_control(principal.assumption = "PIsens-SMDe",
-                                              mix.wts = mix.wts.rER,
-                                              kappa.0R = nuis$kappa.0R,
-                                              varsigma.0R = nuis$varsigma.0R,
-                                              eta = .5)
+mus.0c.PIsensSMDe.hi.nSNR <- mus_under_control(principal.assumption = "PIsens-SMDe",
+                                               mix.wts = mix.wts.nSNR,
+                                               kappa.0R = nuis$kappa.0R,
+                                               varsigma.0R = nuis$varsigma.0R,
+                                               eta = .5)
 
-mus.0c.PIsensSMDe.lo.SCR <- mus_under_control(principal.assumption = "PIsens-SMDe",
-                                              mix.wts = mix.wts.SCR,
-                                              kappa.0R = nuis$kappa.0R,
-                                              varsigma.0R = nuis$varsigma.0R,
-                                              eta = -.5)
+mus.0c.PIsensSMDe.lo.nSCR <- mus_under_control(principal.assumption = "PIsens-SMDe",
+                                               mix.wts = mix.wts.nSCR,
+                                               kappa.0R = nuis$kappa.0R,
+                                               varsigma.0R = nuis$varsigma.0R,
+                                               eta = -.5)
 
-mus.0c.PIsensSMDe.hi.SCR <- mus_under_control(principal.assumption = "PIsens-SMDe",
-                                              mix.wts = mix.wts.SCR,
-                                              kappa.0R = nuis$kappa.0R,
-                                              varsigma.0R = nuis$varsigma.0R,
-                                              eta = .5)
+mus.0c.PIsensSMDe.hi.nSCR <- mus_under_control(principal.assumption = "PIsens-SMDe",
+                                               mix.wts = mix.wts.nSCR,
+                                               kappa.0R = nuis$kappa.0R,
+                                               varsigma.0R = nuis$varsigma.0R,
+                                               eta = .5)
 
 mus.0c.PIsensSMDe.lo.rPI <- mus_under_control(principal.assumption = "PIsens-SMDe",
                                               mix.wts = mix.wts.rPI,
@@ -102,17 +102,17 @@ mus.0c.PIsensSMDe.hi.rPO <- mus_under_control(principal.assumption = "PIsens-SMD
 
 # effect estimates from the plug-in estimator
 
-eff.ER.rER <- plugin_estimate(pi.1 = nuis$pi.1,
-                              mu.11 = nuis$mu.11,
-                              mu.10 = nuis$mu.10,
-                              mu.01 = mus.0c.ER.rER$mu.01,
-                              mu.00 = mus.0c.ER.rER$mu.00) * abs(diff(y.bounds))
+eff.ER.nSNR <- plugin_estimate(pi.1 = nuis$pi.1,
+                               mu.11 = nuis$mu.11,
+                               mu.10 = nuis$mu.10,
+                               mu.01 = mus.0c.ER.nSNR$mu.01,
+                               mu.00 = mus.0c.ER.nSNR$mu.00) * abs(diff(y.bounds))
 
-eff.ER.SCR <- plugin_estimate(pi.1 = nuis$pi.1,
-                              mu.11 = nuis$mu.11,
-                              mu.10 = nuis$mu.10,
-                              mu.01 = mus.0c.ER.SCR$mu.01,
-                              mu.00 = mus.0c.ER.SCR$mu.00) * abs(diff(y.bounds))
+eff.ER.nSCR <- plugin_estimate(pi.1 = nuis$pi.1,
+                               mu.11 = nuis$mu.11,
+                               mu.10 = nuis$mu.10,
+                               mu.01 = mus.0c.ER.nSCR$mu.01,
+                               mu.00 = mus.0c.ER.nSCR$mu.00) * abs(diff(y.bounds))
 
 eff.ER.rPI <- plugin_estimate(pi.1 = nuis$pi.1,
                               mu.11 = nuis$mu.11,
@@ -131,29 +131,29 @@ eff.PI <- plugin_estimate(pi.1 = nuis$pi.1,
                           mu.01 = mus.0c.PI$mu.01,
                           mu.00 = mus.0c.PI$mu.00) * abs(diff(y.bounds))
 
-eff.PIsensSMDe.rER <-
+eff.PIsensSMDe.nSNR <-
     list(lo = plugin_estimate(pi.1 = nuis$pi.1,
                               mu.11 = nuis$mu.11,
                               mu.10 = nuis$mu.10,
-                              mu.01 = mus.0c.PIsensSMDe.lo.rER$mu.01,
-                              mu.00 = mus.0c.PIsensSMDe.lo.rER$mu.00) * abs(diff(y.bounds)),
+                              mu.01 = mus.0c.PIsensSMDe.lo.nSNR$mu.01,
+                              mu.00 = mus.0c.PIsensSMDe.lo.nSNR$mu.00) * abs(diff(y.bounds)),
          hi = plugin_estimate(pi.1 = nuis$pi.1,
                               mu.11 = nuis$mu.11,
                               mu.10 = nuis$mu.10,
-                              mu.01 = mus.0c.PIsensSMDe.hi.rER$mu.01,
-                              mu.00 = mus.0c.PIsensSMDe.hi.rER$mu.00) * abs(diff(y.bounds)))
+                              mu.01 = mus.0c.PIsensSMDe.hi.nSNR$mu.01,
+                              mu.00 = mus.0c.PIsensSMDe.hi.nSNR$mu.00) * abs(diff(y.bounds)))
 
-eff.PIsensSMDe.SCR <-
+eff.PIsensSMDe.nSCR <-
     list(lo = plugin_estimate(pi.1 = nuis$pi.1,
                               mu.11 = nuis$mu.11,
                               mu.10 = nuis$mu.10,
-                              mu.01 = mus.0c.PIsensSMDe.lo.SCR$mu.01,
-                              mu.00 = mus.0c.PIsensSMDe.lo.SCR$mu.00) * abs(diff(y.bounds)),
+                              mu.01 = mus.0c.PIsensSMDe.lo.nSCR$mu.01,
+                              mu.00 = mus.0c.PIsensSMDe.lo.nSCR$mu.00) * abs(diff(y.bounds)),
          hi = plugin_estimate(pi.1 = nuis$pi.1,
                               mu.11 = nuis$mu.11,
                               mu.10 = nuis$mu.10,
-                              mu.01 = mus.0c.PIsensSMDe.hi.SCR$mu.01,
-                              mu.00 = mus.0c.PIsensSMDe.hi.SCR$mu.00) * abs(diff(y.bounds)))
+                              mu.01 = mus.0c.PIsensSMDe.hi.nSCR$mu.01,
+                              mu.00 = mus.0c.PIsensSMDe.hi.nSCR$mu.00) * abs(diff(y.bounds)))
 
 eff.PIsensSMDe.rPI <-
     list(lo = plugin_estimate(pi.1 = nuis$pi.1,
@@ -180,12 +180,12 @@ eff.PIsensSMDe.rPO <-
                               mu.00 = mus.0c.PIsensSMDe.hi.rPO$mu.00) * abs(diff(y.bounds)))
 
 
-effect.estimates <- mget(c("eff.ER.rER",
-                           "eff.ER.SCR",
+effect.estimates <- mget(c("eff.ER.nSNR",
+                           "eff.ER.nSCR",
                            "eff.ER.rPI",
                            "eff.ER.rPO",
                            "eff.PI",
-                           "eff.PIsensSMDe.rER",
+                           "eff.PIsensSMDe.nSNR",
                            "eff.PIsensSMDe.SCR",
                            "eff.PIsensSMDe.rPI",
                            "eff.PIsensSMDe.rPO"))

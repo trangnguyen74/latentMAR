@@ -5,8 +5,8 @@
 #### effects_all_assumptions
 
 #' Compute effects under all choices of assumptions
-#' This function computes effects under all choices of assumptions as in Tables 4 and 5 of the paper. The main use of this function is in bootstrapping.
-#' @param nuis The list of estimated nuisance functions. Like output of \code{j2_nuisance_estimation()} or \code{ec_nuisance_estimation()}.
+#' This function computes effects under all choices of assumptions as in Table 5 of the paper. The main use of this function is in bootstrapping.
+#' @param nuis The list of estimated nuisance functions. Like output of \code{ec_nuisance_estimation()}.
 #' @param sens.type Type of sensitivity analysis (for PI violation) to be included.
 #' @param sens.params Numeric vector including maximum and minimum values of the sensitivity parameter.
 #' @param y.bounds Numeric vector holding the lower and upper bounds of the outcome. Needed only if \code{sens.type = "GOR"} and the outcome is not binary.
@@ -80,38 +80,6 @@ effects_all_assumptions <- function(nuis,
                                                            mu.10 = nuis$mu.10,
                                                            kappa.0R = nuis$kappa.0R),
                                  wt = weights)
-
-    # effects["nearER.nSNR",] <- plugin(nuis = nuis,
-    #                               mus.0 = mus_under_control(principal.assumption = "nearER",
-    #                                                         mix.wts = mix.wts.nSNR,
-    #                                                         mu.10 = nuis$mu.10,
-    #                                                         kappa.0R = nuis$kappa.0R,
-    #                                                         y.bounds = y.bounds),
-    #                               wt = weights)
-    #
-    # effects["nearER.nSCR",] <- plugin(nuis = nuis,
-    #                               mus.0 = mus_under_control(principal.assumption = "nearER",
-    #                                                         mix.wts = mix.wts.nSCR,
-    #                                                         mu.10 = nuis$mu.10,
-    #                                                         kappa.0R = nuis$kappa.0R,
-    #                                                         y.bounds = y.bounds),
-    #                               wt = weights)
-    #
-    # effects["nearER.rPI",] <- plugin(nuis = nuis,
-    #                              mus.0 = mus_under_control(principal.assumption = "nearER",
-    #                                                        mix.wts = mix.wts.rPI,
-    #                                                        mu.10 = nuis$mu.10,
-    #                                                        kappa.0R = nuis$kappa.0R,
-    #                                                        y.bounds = y.bounds),
-    #                              wt = weights)
-    #
-    # effects["nearER.rPO",] <- plugin(nuis = nuis,
-    #                              mus.0 = mus_under_control(principal.assumption = "nearER",
-    #                                                        mix.wts = mix.wts.rPO,
-    #                                                        mu.10 = nuis$mu.10,
-    #                                                        kappa.0R = nuis$kappa.0R,
-    #                                                        y.bounds = y.bounds),
-    #                              wt = weights)
 
     effects["PI",] <- plugin(nuis = nuis,
                              mus.0 = mus_under_control(principal.assumption = "PI",
@@ -338,7 +306,16 @@ effects_all_assumptions <- function(nuis,
 
 
 
+########################################
+#### effects_all_assumptions_binary.y
 
+#' Compute effects under all choices of assumptions in the case of a binary outcome
+#' This function computes effects under all choices of assumptions as in Table 5 of the paper. The main use of this function is in bootstrapping. The key difference between this function and the function \code{effect_all_assumptions_binary.y} is that this one includes a "near ER" assumption, where "near" indicates an approximation similar to that in "near-SNR/SCR", but this is for the principal identification assumption ER itself. The motivation is that for a binary outcome, the ER assumption can imply mu01(X) values that are out of the [0,1] outcome bounds.
+#' @param nuis The list of estimated nuisance functions. Like output of \code{j2_nuisance_estimation()} or \code{ec_nuisance_estimation()}.
+#' @param sens.type Type of sensitivity analysis (for PI violation) to be included.
+#' @param sens.params Numeric vector including maximum and minimum values of the sensitivity parameter.
+#' @param y.bounds Numeric vector holding the lower and upper bounds of the outcome. Needed only if \code{sens.type = "GOR"} and the outcome is not binary.
+#' @export
 
 
 effects_all_assumptions_binary.y <- function(nuis,

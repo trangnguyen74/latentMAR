@@ -3,12 +3,12 @@
 \name{effects_all_assumptions}
 \alias{effects_all_assumptions}
 \title{Compute effects under all choices of assumptions
-This function computes effects under all choices of assumptions as in Tables 4 and 5 of the paper. The main use of this function is in bootstrapping.}
+This function computes effects under all choices of assumptions as in Table 5 of the paper. The main use of this function is in bootstrapping.}
 \usage{
 effects_all_assumptions(nuis, sens.type, sens.params, y.bounds = NULL, weights)
 }
 \arguments{
-\item{nuis}{The list of estimated nuisance functions. Like output of \code{j2_nuisance_estimation()} or \code{ec_nuisance_estimation()}.}
+\item{nuis}{The list of estimated nuisance functions. Like output of \code{ec_nuisance_estimation()}.}
 
 \item{sens.type}{Type of sensitivity analysis (for PI violation) to be included.}
 
@@ -18,5 +18,5 @@ effects_all_assumptions(nuis, sens.type, sens.params, y.bounds = NULL, weights)
 }
 \description{
 Compute effects under all choices of assumptions
-This function computes effects under all choices of assumptions as in Tables 4 and 5 of the paper. The main use of this function is in bootstrapping.
+This function computes effects under all choices of assumptions as in Table 5 of the paper. The main use of this function is in bootstrapping.
 }

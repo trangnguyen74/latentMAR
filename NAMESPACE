@@ -3,6 +3,7 @@
 export(contradiction_plot)
 export(ec_nuisance_estimation)
 export(effects_all_assumptions)
+export(effects_all_assumptions_binary.y)
 export(j2_nuisance_estimation)
 export(mixture_weights)
 export(mus_under_control)
